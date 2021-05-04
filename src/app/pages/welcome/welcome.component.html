@@ -1,0 +1,49 @@
+<!-- ======= Welcome Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+  <div class="container d-flex flex-column align-items-center">
+      <h1>
+        <img class="hero-logo" width="300" src="assets/img/logo_darker.svg" alt="" data-aos="zoom-in" data-aos-delay="1000">
+      </h1>
+      <h2 class="hero-title" data-aos="fade-up" data-aos-delay="1100">Published Author &amp; Public Speaker</h2>
+      <div id="subscribe-section" class="subscribe">
+        <h4>Subscribe now to get the latest updates!</h4>
+        <form name="subscriberForm" #subscriberForm="ngForm">
+          <div class="row justify-content-center">
+            <div class="subscribe-form mx-3">
+              <input #subscriberEmail="ngModel" [(ngModel)]="subscriberModel.email" placeholder="Your Email" type="email"
+                name="subscriberEmail" required>
+              <button role="button" (click)="addSubscriber(subscriberEmail.value, subscriberForm)"
+                [disabled]="subscriberForm.invalid">Subscribe</button>
+            </div>
+            <div class="mt-2">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button (click)="navigateTo('about')" class="btn-about" data-aos="zoom-in" data-aos-delay="1300">About the author <i class="bi bi-arrow-right"></i></button>
+  </div>
+  <div class="modal fade bg-darken-0" [ngClass]="[statusMessage.show ? 'show':'']"
+    [style.display]="statusMessage.show ? 'block':'none'" id="requestMessageBoard" tabindex="-1"
+    aria-labelledby="requestMessageBoardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="requestMessageBoardLabel">
+            {{statusMessage.show ? makeUppercase(statusMessage.type): ''}}
+          </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="toggleStatusMessage()"></button>
+        </div>
+        <div class="modal-body">
+          {{statusMessage.text}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="toggleStatusMessage()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Welcome -->
+<img src="assets/img/steph_profile_clipped_no-background.png" class="profile-image" alt="" data-aos="fade-up" data-aos-offset="-100" data-aos-delay="1500">

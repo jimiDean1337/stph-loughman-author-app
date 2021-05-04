@@ -17,23 +17,33 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sla-web-app",
+            "allowedCommonJsDependencies": [
+              "isotope-layout"
+            ],
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "crossOrigin": "anonymous",
             "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/aos/dist/aos.css",
+              "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
+              "node_modules/aos/dist/aos.js"
+            ]
           },
           "configurations": {
             "production": {
+              "crossOrigin": "anonymous",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -120,6 +130,10 @@
               "devServerTarget": "sla-web-app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

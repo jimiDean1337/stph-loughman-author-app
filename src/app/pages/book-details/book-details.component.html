@@ -1,0 +1,45 @@
+<!-- ======= Book Details Section ======= -->
+<section id="book-details" class="book-details" *ngIf="(selectedBook$ | async) as selectedBook">
+  <div class="container">
+  <div class="row justify-content-center mb-5">
+    <a href="books"><i class="bi bi-arrow-left"></i> Go Back</a>
+  </div>
+    <div class="row gy-4">
+      <div class="col-lg-8">
+        <div class="row">
+          <h2 class="mb-3">Preview of <em>{{selectedBook.title}}</em></h2>
+        </div>
+        <div class="book-details-slider swiper-container">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide" *ngFor="let slide of selectedBook.swiperImages">
+              <img [src]="'assets/img/books/' + slide" class="" alt="">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="book-info">
+          <h3>Book information</h3>
+          <ul>
+            <li><strong>Genre</strong>: {{selectedBook.genre}}</li>
+            <li><strong>Labels</strong>: <span *ngFor="let label of selectedBook.labels; let last = last">{{label}}&nbsp;<b class="text-primary" *ngIf="!last">|</b>&nbsp;</span></li>
+            <li><strong>Print Length</strong>: {{selectedBook.printLength}}</li>
+            <li><strong>Publisher</strong>: {{selectedBook.publisher}}</li>
+            <li><strong>Published date</strong>: {{selectedBook.publishedOn}}</li>
+            <li><strong>Price</strong>: ${{selectedBook.price}}</li>
+            <li><strong>Purchase link</strong>: <a [href]="selectedBook.purchaseLink" target="_blank">Amazon</a></li>
+          </ul>
+        </div>
+        <div class="book-description">
+          <h2>{{selectedBook.title}}</h2>
+          <p>
+            {{selectedBook.text}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section><!-- End book Details Section -->

@@ -1,0 +1,44 @@
+<!-- ======= Books Section ======= -->
+<section id="book" class="book h-100">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Books</h2>
+      <p>All of Steph Loughmans' books are available for purchase on her <a href="https://www.amazon.com/Steph-Loughman/e/B01G49CPL2?ref_=dbs_p_pbk_r00_abau_000000" target="_blank"> Amazon author page</a>.</p>
+      <hr>
+      <p><i class="bi bi-hand-index"></i> Click on a book to see details and a preview. <small>(If available)</small></p>
+    </div>
+
+    <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <ul id="book-flters">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-fiction">Fiction</li>
+          <li data-filter=".filter-non-fiction">Non-Fiction</li>
+          <li data-filter=".filter-coming-soon">Coming Soon</li>
+        </ul>
+      </div>
+    </div> -->
+
+    <div class="row justify-content-center book-container" data-aos="fade-up" data-aos-delay="200">
+
+      <div class="col-12 col-lg-3 book-item" *ngFor="let book of books; let i = index;" (click)="navigate('book-details/' + book.title)">
+        <div class="book-wrap">
+          <img [src]="book.imgSrc" class="img-fluid" alt="">
+          <div class="book-info">
+            <h4>{{book.title}}</h4>
+            <p>{{book.genre}}</p>
+            <div class="book-links" *ngIf="book.previewAvailable">
+              <a [href]="book.imgSrc" class="book-lightbox"
+                [title]="book.title"><i class="bi bi-plus"></i></a>
+              <a [href]="'book-details/' + book.title" class="book-details-lightbox" data-glightbox="type: external"
+                title="Book Details"><i class="bi bi-link-45deg"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End book Section -->

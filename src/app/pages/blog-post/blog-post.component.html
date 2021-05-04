@@ -1,0 +1,78 @@
+<section id="blog-post" class="blog-post">
+
+  <div #postWrapper *ngIf="post$ | async as post; else loading;" class="single-blog-area">
+    <div class="breadcrumb-area bg-img">
+      <div class="container h-100">
+        <div class="section-title">
+          <h2>{{post.title}}</h2>
+          <button class="btn btn-link pt-0 p-1" (click)="navigate('blog')"> <i class="bi bi-arrow-left"></i>&nbsp;Go Back</button>
+        </div>
+        <div class="row h-100 justify-content-center">
+          <div class="col-12 col-md-6">
+            <div class="breadcrumb-text text-center">
+              <!-- <h2 class="text-white-50">{{post.title}}</h2> -->
+              <h5><small>Written by</small> {{post.author.displayName}}</h5>
+              <div class="post-date">
+                <p class="">Published on <b class="active">{{post.published | date: 'LLL dd yyyy'}}</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ##### Hero Area End ##### -->
+
+    <section class="single-blog-area pb-5">
+      <div [ngClass]="postWrapper.clientWidth > 991 ? 'container':'container-fluid'">
+        <div class="row">
+          <div class="col-12">
+            <div class="single-blog-area post-area text-start mx-auto">
+              <!-- <img src="assets/img/core-img/.png" alt=""> -->
+              <!-- <h3>{{post.title}}</h3> -->
+              <div [innerHTML]="post.content | safeHtml" class="blog-content"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <ng-template #loading>LOADING...</ng-template>
+  <!-- ##### Similar Post Area Start ##### -->
+  <div class="sla-blog-area section-padding-100-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-heading text-center mx-auto">
+            <!-- <img src="assets/img/core-img/cross.png" alt=""> -->
+            <h3>Similar Blog Posts</h3>
+            <p>Similar posts by Steph Loughman. All posts can be found <a href="">here</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Single Blog Area -->
+        <div class="col-12 col-lg-4" *ngFor="let post of filteredPosts; let i = index;" (click)="navigate('blog-post', [post.id])">
+          <div class="single-blog-area list mb-100" *ngIf="i < 3">
+            <div class="blog-thumbnail">
+              <!-- <img [src]="'assets/img/blog-img/' + (i + 1) + '.jpg'" alt=""> -->
+              <div class="post-date">
+                <a href="#">{{post.published | date: 'LLL dd yy'}}</a>
+              </div>
+            </div>
+            <div class="blog-content">
+              <a href="#" class="blog-title">{{post.title}}</a>
+              <div [innerHTML]="post.description | safeHtml"></div>
+              <button class="readmore-btn btn btn-default btn-sm">Read
+                More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Similar Post Area End ##### -->
+</section>

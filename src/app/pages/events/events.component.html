@@ -1,0 +1,148 @@
+<!-- ======= events Section ======= -->
+<section id="events" class="events">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Events</h2>
+      <p>A list of all of Steph Loughmans' upcoming events. Find the time and date of the event, as well as a link to
+        get directions.</p>
+    </div>
+
+    <div class="row" *ngIf="events else noEvents;">
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100"
+        *ngFor="let event of events; let i = index; let last = last;">
+        <div class="card" style="">
+          <img [src]="event.imgSrc" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{event.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted ">{{event.subtitle}}</h6>
+            <p><b>WHEN:</b>&nbsp; {{event.date}} at {{event.time}}</p>
+            <p><b>WHERE:</b>&nbsp; {{event.location.address}}</p>
+            <p class="card-text">{{event.text}}</p>
+
+          </div>
+          <div class="card-footer">
+            <a [href]="event.location.googleMapLink" target="_blank" role="button" class="btn-primary btn">Get
+              directions</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <ng-template #noEvents>
+      <div class="row">
+        <div class="text-center" style="padding: 60px 0;">
+          <h3>&nbsp;<i class="bi bi-calendar-minus"></i> No events&nbsp;<i class="bi bi-calendar-minus"></i></h3>
+          <p>We are scheduling new events beginning in May. If you know of an event that would be a good fit for Steph,
+            please submit your request below.</p>
+          <p>Check back here, or sign-up for updates, for information about upcoming events.</p>
+        </div>
+      </div>
+    </ng-template>
+    <div id="subscribe-section" class="subscribe">
+      <h4>Subscribe now to get the latest updates!</h4>
+      <form name="subscriberForm" #subscriberForm="ngForm">
+        <div class="row justify-content-center">
+          <div class="subscribe-form col-md-6 mx-3">
+            <input #subscriberEmail="ngModel" [(ngModel)]="subscriberModel.email" placeholder="Your Email" type="email"
+              name="subscriberEmail" required>
+            <button role="button" (click)="addSubscriber(subscriberEmail.value, subscriberForm)"
+              [disabled]="subscriberForm.invalid">Subscribe</button>
+          </div>
+          <div class="mt-2">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="container" id="eventRequestSection">
+    <div class="section-title">
+      <h2>Submit an Event</h2>
+      <p>If you are aware of, or are hosting an event and would like Steph to attend, please fill out the form below.
+        Her attendace is based on the timing and location of the event, as well as a first-come, first-served basis. She
+        wishes could could attend all events, but has to be practical.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 mt-5 mt-lg-0">
+        <form name="eventRequestForm" class="request-form" #eventRequestForm="ngForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input [(ngModel)]="eventRequestModel.name" minlength="2" maxlength="30" type="text" name="name"
+                class="form-control" id="requestName" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input [(ngModel)]="eventRequestModel.email" type="email" class="form-control" name="email"
+                id="requestEmail" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input [(ngModel)]="eventRequestModel.phone" type="phone" class="form-control" name="phone"
+              id="requestPhone" placeholder="Your Phone Number" required>
+          </div>
+          <div class="form-group mt-3">
+            <input [(ngModel)]="eventRequestModel.title" type="text" class="form-control" name="title" id="requestTitle"
+              placeholder="Event Title" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mt-3">
+              <input [(ngModel)]="eventRequestModel.date" type="text" class="form-control" name="date" id="requestDate"
+                placeholder="Event Date (MM/DD/YY)" required>
+            </div>
+            <div class="col-md-6 form-group mt-3">
+              <input [(ngModel)]="eventRequestModel.time" type="text" class="form-control" name="time" id="requestTime"
+                placeholder="Event Time (example: 12 PM)" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input [(ngModel)]="eventRequestModel.location" type="text" class="form-control" name="location"
+              id="requestLocation" placeholder="Event Location (include address, city, and state)" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea [(ngModel)]="eventRequestModel.comments" maxlength="350" class="form-control" name="comments"
+              id="requestComments" rows="5" placeholder="Comments" required></textarea>
+          </div>
+          <div class="form-group mt-3">
+            <span class="switch">
+              <input type="checkbox" [checked]="eventRequestModel.canCall" [(ngModel)]="eventRequestModel.canCall"
+                name="canCall" class="switch" id="requestCanCall">
+              <label for="canCall">Ok to call you?</label>
+            </span>
+
+          </div>
+          <!-- <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message" *ngIf="eventRequestForm.invalid">{{eventRequestForm | json}</div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div> -->
+          <div class="text-center"><button type="button"
+              (click)="addEventRequest(eventRequestForm.value, eventRequestForm)" class="btn-themed"
+              [disabled]="eventRequestForm.invalid">Submit Request</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bg-darken-0" [ngClass]="[statusMessage.show ? 'show':'']"
+    [style.display]="statusMessage.show ? 'block':'none'" id="requestMessageBoard" tabindex="-1"
+    aria-labelledby="requestMessageBoardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="requestMessageBoardLabel">
+            {{statusMessage.show ? makeUppercase(statusMessage.type): ''}}
+          </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="toggleStatusMessage()"></button>
+        </div>
+        <div class="modal-body">
+          {{statusMessage.text}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="toggleStatusMessage()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End events Section -->

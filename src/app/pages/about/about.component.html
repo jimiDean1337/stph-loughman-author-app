@@ -1,0 +1,146 @@
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>About</h2>
+      <p>Steph Loughman is an author who has transformed her passion for writing into a message of healing, perpetuated by her convictions. Her objective is to help the people, who like her, have faced difficult decisions that can have long lasting effects.</p>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="assets/img/steph_profile_2.jpeg" class="img-fluid" alt="Steph Loughman Profile Image">
+      </div>
+      <div class="col-lg-8 pt-4 pt-lg-0 content">
+        <h3>Author &amp; Public Speaker</h3>
+        <p class="fst-italic">
+          Steph Loughman combines her authentic, personable writing style, with real-life experiences that her readers can relate to. She provides a perspective that offers hope and redemption for those who have dealt with similar situations.
+        </p>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-rounded-right"></i> <strong>Birthday:</strong> 10 April 1974</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>Age:</strong> 47</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>Phone:</strong> +740 877 7509</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>City:</strong> Newark, USA</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <ul>
+              <li><i class="bi bi-rounded-right"></i> <strong>Books:</strong> 3</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>Genre:</strong> Fiction/Non-Fiction/ Faith</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>Email:</strong> steph@stephLoughman.com</li>
+              <li><i class="bi bi-rounded-right"></i> <strong>Interests:</strong> </li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          Steph Loughman is an author of fictional books based on real life. She is also happily married with eight children and
+          seven grandchildren. They live in central Ohio, but dream of one day living in the Outer Banks of North Carolina.
+          Although her books are fictional, she writes most of her books from some personal aspect. In her first book, The
+          Journey, Steph uses her own personal pain to tell the story of little Joshua, who died of an abortion when she was
+          seventeen weeks pregnant. Through an emotional journey between Heaven and Earth, Joshua and his mommy find each other in
+          a dream when she experiences forgiveness and healing. The second of Steph’s published work is a Bible study companion to
+          The Journey.
+
+        </p>
+        <p>Steph’s newest project is a novel series where Joshua is joined with two of his siblings (who passed away as a result of
+        miscarriages) and their uncle Robb (Steph’s brother who died in 2004) as they go on a cross-country adventure after the
+        death of their parents. Turning her pain into beauty, Steph gives life once again to these precious souls in her books.
+        Book one of this series will be release early summer 2021.
+        Steph loves telling her story showing the amazing grace of God through the hardships of life and is always open to
+        speaking engagements of any size.</p>
+      </div>
+    </div>
+    <hr class="my-5">
+    <div id="subscribe-section" class="subscribe">
+      <h4>Subscribe now to get the latest updates!</h4>
+      <form name="subscriberForm" #subscriberForm="ngForm">
+        <div class="row justify-content-center">
+          <div class="subscribe-form col-md-6 mx-3">
+            <input #subscriberEmail="ngModel" [(ngModel)]="subscriberModel.email" placeholder="Your Email" type="email"
+              name="subscriberEmail" required>
+            <button role="button" (click)="addSubscriber(subscriberEmail.value, subscriberForm)"
+              [disabled]="subscriberForm.invalid">Subscribe</button>
+          </div>
+          <div class="mt-2">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr class="my-5">
+
+    <div class="container">
+      <div class="section-title">
+        <h2>Books</h2>
+        <p>Available for purchase now at Amazon</p>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let book of books;">
+          <a href="books">
+            <img style="max-width: 350px;" class="img-fluid" [src]="'assets/img/books/book-covers/' + book" [alt]="'Image of' + book">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5">
+  </div>
+  <div class="modal fade bg-darken-0" [ngClass]="[statusMessage.show ? 'show':'']"
+    [style.display]="statusMessage.show ? 'block':'none'" id="requestMessageBoard" tabindex="-1"
+    aria-labelledby="requestMessageBoardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="requestMessageBoardLabel">
+            {{statusMessage.show ? makeUppercase(statusMessage.type): ''}}
+          </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="toggleStatusMessage()"></button>
+        </div>
+        <div class="modal-body">
+          {{statusMessage.text}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="toggleStatusMessage()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End About Section -->
+
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Reviews</h2>
+      <p>Steph Loughman's readers can agree that she continues to find a balance in her writing that offers spiritual guidence, and honest self-reflection. Below are just a few of the reviews from Steph Loughman's faithful readers.</p>
+    </div>
+
+    <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let slide of testimonials">
+          <div class="testimonial-item">
+            <img [src]="slide.imgSrc" class="testimonial-img" [alt]="'Profile image for' + slide.name">
+            <h3>{{slide.name}}</h3>
+            <h4>{{slide.date}}</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              {{slide.text}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div><!-- End testimonial item -->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</section><!-- End Testimonials Section -->

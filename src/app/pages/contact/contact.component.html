@@ -1,0 +1,96 @@
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Contact</h2>
+      <p>Steph Loughman wants to hear from <b>YOU</b>! If you have any questions, or would just like to say hello, please fill out the form below. You also get the option of recieving The Steph Loughman newlsetter containing updates on events and publishing dates, plus tons of other great content!</p>
+    </div>
+
+    <div>
+      <iframe style="border:0; width: 100%; height: 270px;"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48846.28647727052!2d-82.45408936443165!3d40.07780090378279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883817d9b080117d%3A0x11616c35e1b4991c!2sNewark%2C%20OH!5e0!3m2!1sen!2sus!4v1618293089328!5m2!1sen!2sus"
+        frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="row mt-5">
+
+      <div class="col-lg-4">
+        <div class="info">
+          <div class="address">
+            <i class="bi bi-geo-alt"></i>
+            <h4>Location:</h4>
+            <p>Newark OH, 43055</p>
+          </div>
+
+          <div class="email">
+            <i class="bi bi-envelope"></i>
+            <h4>Email:</h4>
+            <p>authorstephloughman@gmail.com</p>
+          </div>
+
+          <div class="phone">
+            <i class="bi bi-phone"></i>
+            <h4>Call:</h4>
+            <p>+1 740 877 7509</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-8 mt-5 mt-lg-0">
+
+        <form name="contactForm" class="email-form" #contactForm="ngForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input [(ngModel)]="contactModel.name" minlength="2" maxlength="30" type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input [(ngModel)]="contactModel.email" email type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input [(ngModel)]="contactModel.subject" type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea [(ngModel)]="contactModel.message" maxlength="350" class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+          </div>
+          <div class="form-group mt-3">
+              <span class="switch">
+                <input type="checkbox" [checked]="contactModel.newsletter" [(ngModel)]="contactModel.newsletter" name="newsletter" class="switch" id="newsletter">
+                <label for="newsletter">Get newsletter</label>
+              </span>
+
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="button" (click)="addContact(contactForm.value, contactForm)" [disabled]="contactForm.invalid">Send Message</button></div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal fade bg-darken-0" [ngClass]="[statusMessage.show ? 'show':'']" [style.display]="statusMessage.show ? 'block':'none'" id="contactMessageBoard" tabindex="-1"
+    aria-labelledby="contactMessageBoardLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{statusMessage.show ? makeUppercase(statusMessage.type): ''}}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="toggleStatusMessage()"></button>
+        </div>
+        <div class="modal-body">
+          {{statusMessage.text}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="toggleStatusMessage()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Contact Section -->

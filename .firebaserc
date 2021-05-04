@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "steph-loughman-author-site": {
+      "hosting": {
+        "sla-web-app": [
+          "steph-loughman-author-site"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "steph-loughman-author-site"
+  }
+}

@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/functions";
+// Colors
+$primary: #3dc8b7;
+$secondary: #F8B8B6;
+
+$white: #FFFFFF;
+$black: #434343;
+
+$primary-box-shadow: rgba(61, 200, 184, 0.25);
+
+$theme-colors: ("primary": $primary,
+  "secondary": $secondary,
+) !default;
