@@ -4,7 +4,7 @@
 
     <div class="section-title">
       <h2>Events</h2>
-      <p>A list of all of Steph Loughmans' upcoming events. Find the time and date of the event, as well as a link to
+      <p>Steph Loughmans' upcoming events. Find the time and date of the event, as well as a link to
         get directions.</p>
     </div>
 
@@ -18,8 +18,8 @@
             <h6 class="card-subtitle mb-2 text-muted ">{{event.subtitle}}</h6>
             <p><b>WHEN:</b>&nbsp; {{event.date}} at {{event.time}}</p>
             <p><b>WHERE:</b>&nbsp; {{event.location.address}}</p>
-            <p class="card-text">{{event.text}}</p>
-
+            <p class="card-text" *ngIf="!event.body">{{event.text}}</p>
+            <div *ngIf="event?.body" [innerHTML]="event?.body | safeHtml"></div>
           </div>
           <div class="card-footer">
             <a [href]="event.location.googleMapLink" target="_blank" role="button" class="btn-primary btn">Get

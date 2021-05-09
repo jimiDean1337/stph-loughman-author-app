@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
-import { populateTemplate } from './email-template-basic';
-import { TemplateConfig } from './templates/template.config';
+import { SUBSCRIBER_TEMPLATE } from './subscriber.template';
+
 // import { populateClientConsultationTemplate } from './consultation-html-templates';
 
 // import {Mailer} from './mailer';
@@ -41,15 +41,11 @@ exports.sendNewsletterToSubscriber = functions.firestore
   });
 
 async function sendNewSubscriberEmail(email: string) {
-  const templateConfig: TemplateConfig = {
-    links: [],
-    user: {}
-  }
   const mailOptions: nodemailer.SendMailOptions = {
     from: `"Steph Loughman | Author" hello@stephloughman.com`,
     to: email,
-    html: populateTemplate(templateConfig)
-  };
+    html: SUBSCRIBER_TEMPLATE
+    };
 
   // The user subscribed to updates and the newsletter.
   mailOptions.subject = `Thanks for subscribing to the ${APP_NAME} newsletter!`;

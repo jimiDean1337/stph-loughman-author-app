@@ -92,7 +92,7 @@ export class EventsComponent implements OnInit {
     this.eventRequestModel = {
       canCall: true
     }
-    // this.eventService.getAllEvents().subscribe(events => this.events = events);
+    this.eventService.getAllEvents().subscribe(events => this.events = events);
   }
 
 }
