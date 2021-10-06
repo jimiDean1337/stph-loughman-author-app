@@ -14,7 +14,7 @@
         <div class="card" style="">
           <img [src]="event.imgSrc" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">{{event.title}}</h5>
+            <h5 class="card-title">{{event.title}}&nbsp;<span *ngIf="event.hasEnded" class="badge rounded-pill" style="background-color: red;">Event Ended</span></h5>
             <h6 class="card-subtitle mb-2 text-muted ">{{event.subtitle}}</h6>
             <p><b>WHEN:</b>&nbsp; {{event.date}} at {{event.time}}</p>
             <p><b>WHERE:</b>&nbsp; {{event.location.address}}</p>

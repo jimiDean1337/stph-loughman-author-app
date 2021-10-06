@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 import { AuthorEvent } from 'src/app/interface/event';
 import { EventRequest } from 'src/app/interface/event-request';
 
@@ -22,6 +23,7 @@ export class EventService {
 
   getAllEvents() {
     return this.eventsCollection.valueChanges({ idField: true });
+      /* .pipe(map(events => events.filter((event: AuthorEvent) => event.hasEnded !== true))); */
   }
 
   getEventByTitle(eventTitle: string) {

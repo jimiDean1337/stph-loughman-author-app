@@ -4,6 +4,7 @@ export interface AuthorEvent {
   imgSrc?: string;
   date?: string | Date;
   time?: string;
+  hasEnded?: boolean;
   location?: {
     address?: string,
     coords?: any,

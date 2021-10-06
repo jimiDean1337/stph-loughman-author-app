@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { DataService } from 'src/app/core/services/data.service';
 import { Contact } from 'src/app/interface/contact';
 
@@ -19,7 +20,7 @@ export class ContactComponent implements OnInit {
     newsletter: true
   };
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, public title: Title) {}
 
   addContact(data: Contact, form: NgForm) {
     console.log('contact form', form)
@@ -58,6 +59,7 @@ export class ContactComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.title.setTitle('Contact - Steph Loughman | Author')
     // this.toggleStatusMessage(true, 'success', 'Testing 1234567890')
   }
 

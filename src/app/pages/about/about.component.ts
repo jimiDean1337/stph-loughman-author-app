@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { DataService } from 'src/app/core/services/data.service';
 import SwiperCore, {
   Navigation,
@@ -73,7 +74,7 @@ A moving and inspiring account of a taboo subject.`
     show: false,
     text: ''
   };
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, public title: Title) {
   }
 
   addSubscriber(email: string, form: NgForm) {
@@ -115,6 +116,7 @@ A moving and inspiring account of a taboo subject.`
   }
 
   ngOnInit(): void {
+    this.title.setTitle('About - Steph Loughman | Author')
     /**
    * Testimonials slider
    */

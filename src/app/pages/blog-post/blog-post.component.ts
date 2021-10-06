@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
@@ -19,7 +20,7 @@ export class BlogPostComponent implements OnInit {
 
   filteredPosts: any[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private blogService: BlogService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private blogService: BlogService, public title: Title) { }
 
 
   filterPostsByKeywords(keys: string[] = null) {
@@ -36,7 +37,8 @@ export class BlogPostComponent implements OnInit {
       this.router.navigate([`${url}/${params ? params.join('/'):''}`])
     }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.title.setTitle('Blog Post - Steph Loughman | Author')
       this.route.paramMap.subscribe(params => {
         this.postId = params.get('postId');
         this.post$ = this.blogService.getPostById(this.postId)

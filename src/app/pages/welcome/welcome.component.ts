@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Gallery, GalleryItem, ImageItem, ImageItemData  } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
@@ -21,7 +22,7 @@ export class WelcomeComponent implements OnInit {
   };
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dataService: DataService, public title: Title) { }
 
   addSubscriber(email: string, form: NgForm) {
     const data = {
@@ -65,7 +66,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.title.setTitle('Welcome - Steph Loughman | Author')
   }
 
 

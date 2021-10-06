@@ -1,58 +1,74 @@
+/* TODO: Refactor Firebase Functions @critical */
+
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
-import * as nodemailer from 'nodemailer';
-import { SUBSCRIBER_TEMPLATE } from './subscriber.template';
+import { initializeApp } from './modules/init';
+import { sendEmail, MailOptions } from './modules/mail';
+import { handleScheduledNewsletter } from './modules/newsletter';
 
-// import { populateClientConsultationTemplate } from './consultation-html-templates';
+// HTML Templates
+import { WELCOME_TEMPLATE } from './templates/subscriber.template';
 
-// import {Mailer} from './mailer';
-// import { newsletterTemplate as template } from './email.constant';
+// Init Firebase then return admin auth credentials
+const { admin } = initializeApp();
 
-admin.initializeApp(functions.config().firebase);
-const mainEmail: any = functions.config().main.email;
-const mainPassword: any = functions.config().main.password;
-const mailTransport: nodemailer.Transporter = nodemailer.createTransport({
-  name: 'hello@stephloughman.com',
-  service: 'Zoho',
-  auth: {
-    user: mainEmail,
-    pass: mainPassword,
-  },
-});
+
 
 // Company name to include in the emails
 const APP_NAME = 'Steph Loughman | Author';
 
 /**
- * method for sending email to subscriber
+ * method for scheduling subscribers newsletter email
  */
-exports.sendNewsletterToSubscriber = functions.firestore
+const newsletterConfig = {
+  newsletterId: '004',
+  schedule: '1 of month 02:00',
+  collection: 'subscribers',
+  mailOptions: {
+    from: `"Steph Loughman | Author" hello@stephloughman.com`,
+    subject: 'Steph Loughman | Author October Newsletter',
+  }
+}
+exports.scheduleNewsletter = handleScheduledNewsletter(admin, newsletterConfig);
+
+/**
+ * method for sending welcome email to subscriber
+ */
+exports.sendSubscriberWelcome = functions.firestore
   .document(`subscribers/{subscriberId}`)
   .onCreate((snap, context) => {
     let user: any;
     if (snap.exists) {
       user = snap.data();
-      return sendNewSubscriberEmail(user.email)
-        .then(res => console.log(res))
+      return sendSubscriberWelcomeEmail(user.email)
         .catch(err => console.log('error subscribing user', err));
     } else {
       return null;
     }
   });
 
-async function sendNewSubscriberEmail(email: string) {
-  const mailOptions: nodemailer.SendMailOptions = {
+async function sendSubscriberWelcomeEmail(email: string) {
+  const mailOptions: MailOptions = {
     from: `"Steph Loughman | Author" hello@stephloughman.com`,
     to: email,
-    html: SUBSCRIBER_TEMPLATE
-    };
+    subject: `Thanks for subscribing to the ${APP_NAME} newsletter!`,
+    html: WELCOME_TEMPLATE
+  };
 
-  // The user subscribed to updates and the newsletter.
-  mailOptions.subject = `Thanks for subscribing to the ${APP_NAME} newsletter!`;
-  await mailTransport.sendMail(mailOptions);
-  console.log('New subscriber email sent to:', email);
+  // The user subscribed to updates and the newsletter, send welcome email to user.
+  await sendEmail(mailOptions);
   return null;
 }
+
+/* async function sendNewsletter(email: string, newsletterId: string) {
+  const mailOptions = {
+    from: `"Steph Loughman | Author" hello@stephloughman.com`,
+    to: email,
+    subject: `Steph Loughman | Author Newsletter!`,
+    html: NEWSLETTER_001
+  };
+  await sendEmail(mailOptions);
+  return null;
+} */
 
 exports.sendNewContactEmail = functions.firestore
   .document(`contacts/{contactId}`)
@@ -82,7 +98,7 @@ async function sendWelcomeToContact(
   message?: string,
   timestamp?: any */
 ) {
-  const mailOptions: nodemailer.SendMailOptions = {
+  const mailOptions: MailOptions = {
     from: `"Steph Loughman | Author" hello@stephloughman.com`,
     to: email
   };
@@ -90,7 +106,7 @@ async function sendWelcomeToContact(
   // The user sent a contact form.
   mailOptions.subject = `Thanks for contacting ${APP_NAME}!`;
   mailOptions.text = `Hey! Thanks for contacting me, ${displayName}! New and existing readers are why I love writing. Knowing that my stories have an impact on those who read them has such a profound effect on me. As an author, I simply write from my heart, and because of my faith, the words pour out of me, and I know this is God's love, filling me up and overflowing. I feel convicted to share this experience, and all the others with you, so that you too can feel His love.\n\n\n`;
-  await mailTransport.sendMail(mailOptions);
+  await sendEmail(mailOptions);
   console.log('New contact email sent to:', email);
   return null;
 }
@@ -119,7 +135,7 @@ async function sendRequestResponse(
   displayName?: string,
   title?: string
 ) {
-  const mailOptions: nodemailer.SendMailOptions = {
+  const mailOptions: MailOptions = {
     from: `"Steph Loughman | Author" hello@stephloughman.com`,
     to: email
   };
@@ -127,7 +143,7 @@ async function sendRequestResponse(
   // The user sent a contact form.
   mailOptions.subject = `Thanks for contacting ${APP_NAME}!`;
   mailOptions.text = `Hey! Thanks for the heads-up about ${title}, ${displayName}! The Steph Loughman support team will review your event, then if we decide to proceed, we will notify you to set up a call to discuss the details.\n\n\nThanks again for supporting Steph Loughman, and we hope to talk soon!`;
-  await mailTransport.sendMail(mailOptions);
+  await sendEmail(mailOptions);
   console.log('New event-request response email sent to:', email);
   return null;
 }

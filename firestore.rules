@@ -14,6 +14,10 @@ service cloud.firestore {
       allow read, write;
     }
 
+    match /tests/{test} {
+      allow read;
+    }
+
     match /subscribers/{subscriber} {
       allow write;
     }

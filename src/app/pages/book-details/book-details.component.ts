@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -42,7 +43,8 @@ export class BookDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     // public gallery: Gallery,
-    private bookService: BookService
+    private bookService: BookService,
+    public title: Title
   ) {
 
   }
@@ -51,6 +53,7 @@ export class BookDetailsComponent implements OnInit {
     this.selectedBook$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const bookTitle = params.get('bookTitle');
+        this.title.setTitle(bookTitle + ' Details - Steph Loughman | Author')
         return this.bookService.getBookByTitle(bookTitle);
       })
     );

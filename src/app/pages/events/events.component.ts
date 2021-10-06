@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { DataService } from 'src/app/core/services/data.service';
 import { EventService } from 'src/app/core/services/event.service';
 import { AuthorEvent } from 'src/app/interface/event';
@@ -24,7 +25,7 @@ export class EventsComponent implements OnInit {
     show: false,
     text: ''
   };
-  constructor(private eventService: EventService, private dataService: DataService) { }
+  constructor(private eventService: EventService, private dataService: DataService, public title: Title) { }
 
   addEventRequest(data: EventRequest, form: NgForm) {
     let message: any;
@@ -89,6 +90,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Events - Steph Loughman | Author')
     this.eventRequestModel = {
       canCall: true
     }

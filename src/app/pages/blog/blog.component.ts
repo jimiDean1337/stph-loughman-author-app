@@ -3,6 +3,7 @@ import { BlogService } from '../../core/services/blog.service';
 import { Router } from '@angular/router';
 import { NgModel, NgForm } from '@angular/forms';
 import { isNgTemplate } from '@angular/compiler';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'sla-blog',
@@ -23,9 +24,10 @@ export class BlogComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router, private blogService: BlogService) { }
+  constructor(private router: Router, private blogService: BlogService, public title: Title) { }
 // TODO: Complete blog filters
   ngOnInit(): void {
+    this.title.setTitle('Blog - Steph Loughman | Author')
     this.filterResults = [];
     this.blogService.getAllPosts()
       .subscribe(res => {
