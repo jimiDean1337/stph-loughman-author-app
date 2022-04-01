@@ -17,11 +17,12 @@
             <h5 class="card-title">{{event.title}}&nbsp;<span *ngIf="event.hasEnded" class="badge rounded-pill" style="background-color: red;">Event Ended</span></h5>
             <h6 class="card-subtitle mb-2 text-muted ">{{event.subtitle}}</h6>
             <p><b>WHEN:</b>&nbsp; {{event.date}} at {{event.time}}</p>
-            <p><b>WHERE:</b>&nbsp; {{event.location.address}}</p>
+            <p *ngIf="event.location.address"><b>WHERE:</b>&nbsp; {{event.location.address}}</p>
+            <p *ngIf="event.location.link"><b>WHERE:</b>&nbsp; <a [href]="event.location.link" target="_blank">{{event.location.link}}</a> </p>
             <p class="card-text" *ngIf="!event.body">{{event.text}}</p>
             <div *ngIf="event?.body" [innerHTML]="event?.body | safeHtml"></div>
           </div>
-          <div class="card-footer">
+          <div class="card-footer" *ngIf="event.location.googleMapLink">
             <a [href]="event.location.googleMapLink" target="_blank" role="button" class="btn-primary btn">Get
               directions</a>
           </div>

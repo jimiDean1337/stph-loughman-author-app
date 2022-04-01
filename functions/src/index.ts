@@ -20,12 +20,12 @@ const APP_NAME = 'Steph Loughman | Author';
  * method for scheduling subscribers newsletter email
  */
 const newsletterConfig = {
-  newsletterId: '004',
-  schedule: '1 of month 02:00',
+  newsletterId: '006',
+  schedule: '1 of month 21:30',
   collection: 'subscribers',
   mailOptions: {
     from: `"Steph Loughman | Author" hello@stephloughman.com`,
-    subject: 'Steph Loughman | Author October Newsletter',
+    subject: 'Steph Loughman | Author March Newsletter',
   }
 }
 exports.scheduleNewsletter = handleScheduledNewsletter(admin, newsletterConfig);

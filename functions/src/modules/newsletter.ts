@@ -8,7 +8,7 @@ export function handleScheduledNewsletter(admin: any, config: { newsletterId: st
   return functions.pubsub.schedule(config.schedule)/* Sends once a month */
     .timeZone('America/New_York')
     .onRun((context) => {
-      console.log(`On scheduler run`)
+      console.log(`On scheduler run for: `, config.collection)
       return admin
         .firestore()
         .collection(config.collection)

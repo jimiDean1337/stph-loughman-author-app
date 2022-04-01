@@ -1,4 +1,5 @@
 export interface AuthorEvent {
+  [key: string]: any;
   title?: string;
   subtitle?: string;
   imgSrc?: string;
@@ -6,6 +7,7 @@ export interface AuthorEvent {
   time?: string;
   hasEnded?: boolean;
   location?: {
+    link?: string,
     address?: string,
     coords?: any,
     googleMapLink?: string
