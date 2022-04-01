@@ -14,8 +14,9 @@ export class BlogService {
 
   protected apiKey = 'AIzaSyCwVyv5WDVwg5XDyGetGqYo2UWScueSk84';
   apiRoot = 'https://www.googleapis.com/blogger/v3/blogs/';
+  mediumApiRoot = 'https://api.medium.com/v1/users/';
   authorId = '6952084627250551242';
-  posts: any;
+  posts$: any;
   constructor(private http: HttpClient) { }
 
   getAllPosts(limit = 50) {
