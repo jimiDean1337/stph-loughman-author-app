@@ -1,6 +1,6 @@
 {
   "name": "sla-web-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,6 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc"
+  },
+  "engines": {
+    "node": "16"
   },
   "private": true,
   "dependencies": {
@@ -28,11 +31,9 @@
     "bootstrap-icons": "^1.4.1",
     "firebase": "^7.0 || ^8.0",
     "imagesloaded": "^4.1.4",
-    "isotope-layout": "^3.0.6",
     "jquery": "^3.6.0",
     "masonry-layout": "^4.2.2",
     "ng-gallery": "^5.0.0",
-    "ngx-isotope": "^0.1.7",
     "rxjs": "~6.6.0",
     "swiper": "^6.5.6",
     "tslib": "^2.0.0",
@@ -44,21 +45,13 @@
     "@angular/cli": "~11.2.4",
     "@angular/compiler-cli": "~11.2.5",
     "@types/aos": "^3.0.3",
-    "@types/isotope-layout": "^3.0.8",
-    "@types/jasmine": "~3.6.0",
+
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "firebase-tools": "^8.0.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.1.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
     "open": "^7.0.3",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",

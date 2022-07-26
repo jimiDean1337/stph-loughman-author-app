@@ -15,12 +15,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.1",
+    "firebase-functions": "^3.19.0",
     "moment": "^2.29.1",
     "nodemailer": "^6.7.2",
     "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
+    "@types/node": "^17.0.23",
     "@types/nodemailer": "^6.4.4",
     "@types/nodemailer-smtp-transport": "^2.7.5",
     "firebase-functions-test": "^0.3.3",
